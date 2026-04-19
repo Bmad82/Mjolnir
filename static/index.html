@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mjölnir — Hammerfall</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <span class="hammer-icon">🔨</span>
+    <div>
+      <h1>Mjölnir</h1>
+      <div class="tagline">Hammerfall · Claude Code Launcher</div>
+    </div>
+    <span id="status-dot" class="status-dot" title="Backend-Status"></span>
+  </header>
+
+  <main>
+    <div id="global-error" class="error-banner"></div>
+    <div id="global-info" class="info-banner"></div>
+
+    <!-- ── Launcher ── -->
+    <section id="launcher-section">
+      <h2>Neue Session starten</h2>
+      <div class="launcher-card">
+        <div>
+          <label class="field-label" for="project-select">Projekt</label>
+          <div class="select-wrapper">
+            <select id="project-select">
+              <option value="">— Kein Projekt (nur claude) —</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="field-label" for="model-select">Modell</label>
+          <div class="select-wrapper">
+            <select id="model-select"></select>
+          </div>
+        </div>
+
+        <div>
+          <label class="field-label" for="session-name-input">Session-Name</label>
+          <input
+            id="session-name-input"
+            type="text"
+            placeholder="z.B. patch-01"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+
+        <div class="toggle-row">
+          <label class="toggle-label" for="bypass-toggle">Berechtigungen umgehen</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="bypass-toggle" />
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+        <div id="bypass-warning" class="warning-hint">
+          ⚠ --dangerously-skip-permissions aktiv. Nur im Tailscale-Netz verwenden.
+        </div>
+
+        <div id="launch-error" class="error-banner"></div>
+        <button class="btn-launch" id="launch-btn" onclick="launchSession()">
+          ⚡ Session starten
+        </button>
+      </div>
+    </section>
+
+    <!-- ── Active Sessions ── -->
+    <section id="sessions-section">
+      <div class="toolbar" style="margin-bottom:12px;">
+        <h2 style="margin-bottom:0;">Aktive Sessions</h2>
+        <button class="btn-secondary" style="margin-left:auto;font-size:13px;min-height:36px;padding:0 12px;" onclick="loadSessions()">↻ Aktualisieren</button>
+      </div>
+      <div id="sessions-container" class="sessions-grid">
+        <div class="empty-state">
+          <span class="big">⚒</span>
+          Lade Sessions…
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
